@@ -1,0 +1,6 @@
+Step 3 — (Optional) Use a Local Server Instead
+If the browser blocks anything due to file:// restrictions, you can serve it with a simple local server. If you have Python installed:
+cd "c:\projectlord\New folder\Dbms_Army"
+python -m http.server 8080
+Then open http://localhost:8080 in your browser.
+Or if you have VS Code's Live Server extension, right-click index.html and choose "Open with Live Server".

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nigerian Defence — Personnel Management Module</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ══════════════════ LOGIN SCREEN ══════════════════ -->
+<div class="login-screen" id="loginScreen">
+
+    <!-- Left decorative panel -->
+    <div class="login-left-panel">
+        <div class="llp-overlay"></div>
+        <div class="llp-content">
+            <div class="llp-flag">🇳🇬</div>
+            <h1 class="llp-title">Armed Forces<br>of Nigeria</h1>
+            <p class="llp-sub">Personnel Management System<br>Defence Headquarters, Abuja</p>
+            <div class="llp-divider"></div>
+            <div class="llp-tagline">
+                <i class="fas fa-shield-halved"></i>
+                Secure &bull; Classified &bull; Authorised Use Only
+            </div>
+            <div class="llp-stripes">
+                <div class="stripe green"></div>
+                <div class="stripe white"></div>
+                <div class="stripe green"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right login form panel -->
+    <div class="login-right-panel">
+        <div class="login-card">
+
+            <div class="login-card-header">
+                <div class="login-logo">
+                    <span>🇳🇬</span>
+                </div>
+                <h2 class="login-card-title">Welcome Back</h2>
+                <p class="login-card-sub">Sign in to access the Personnel Management Module</p>
+            </div>
+
+            <!-- Error box -->
+            <div class="login-error-box" id="loginError" style="display:none">
+                <i class="fas fa-circle-exclamation"></i>
+                <span id="loginErrorMsg">Invalid credentials. Please try again.</span>
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-form" id="loginForm">
+                <div class="lf-group">
+                    <label class="lf-label">Username</label>
+                    <div class="lf-input-wrap">
+                        <i class="fas fa-user lf-icon"></i>
+                        <input type="text" class="lf-input" id="loginUsername"
+                               placeholder="Enter your username" autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="lf-group">
+                    <label class="lf-label">Password</label>
+                    <div class="lf-input-wrap">
+                        <i class="fas fa-lock lf-icon"></i>
+                        <input type="password" class="lf-input" id="loginPassword"
+                               placeholder="Enter your password" autocomplete="current-password">
+                        <button type="button" class="lf-eye-btn" id="togglePwd" tabindex="-1">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" class="login-submit-btn" id="loginSubmitBtn"
+                        onclick="app._doLogin()">
+                    <i class="fas fa-right-to-bracket"></i>
+                    <span>Access System</span>
+                </button>
+            </div>
+
+            <!-- Demo credentials hint -->
+            <div class="login-hint-box">
+                <div class="hint-head"><i class="fas fa-circle-info"></i> Demo Credentials</div>
+                <div class="hint-grid">
+                    <div class="hint-item">
+                        <div class="hint-role super-role">
+                            <i class="fas fa-user-shield"></i> Super User
+                        </div>
+                        <code class="hint-cred">admin / Admin@1234</code>
+                        <div class="hint-desc">Full access — add, edit, delete data &amp; manage users</div>
+                    </div>
+                    <div class="hint-item">
+                        <div class="hint-role viewer-role">
+                            <i class="fas fa-eye"></i> Viewer
+                        </div>
+                        <code class="hint-cred">viewer / Viewer@1234</code>
+                        <div class="hint-desc">Read-only — view and print data only</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-footer-text">
+                <i class="fas fa-lock" style="font-size:10px"></i>
+                RESTRICTED ACCESS — AUTHORISED PERSONNEL ONLY
+            </div>
+
+        </div>
+    </div>
+
+</div><!-- /.login-screen -->
+
+
+<!-- ══════════════════ MAIN APP ══════════════════ -->
+<div class="app-wrapper" id="appWrapper" style="display:none">
+
+    <!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-emblem">
+                <span class="flag-emoji">🇳🇬</span>
+            </div>
+            <div class="brand-text">
+                <span class="brand-line1">Nigerian</span>
+                <span class="brand-line2">Defence</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                    <span class="nav-label">Dashboard</span>
+                </li>
+                <li class="nav-item" data-page="personnel">
+                    <i class="fas fa-id-badge nav-icon"></i>
+                    <span class="nav-label">Personnel Records</span>
+                </li>
+                <li class="nav-item" data-page="assignments">
+                    <i class="fas fa-history nav-icon"></i>
+                    <span class="nav-label">Assignment History</span>
+                </li>
+                <li class="nav-item" data-page="reviews">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <span class="nav-label">Performance Reviews</span>
+                </li>
+                <li class="nav-item" data-page="availability">
+                    <i class="fas fa-signal nav-icon"></i>
+                    <span class="nav-label">Availability Status</span>
+                </li>
+                <li class="nav-item" data-page="deployments">
+                    <i class="fas fa-globe-africa nav-icon"></i>
+                    <span class="nav-label">Deployments</span>
+                </li>
+                <li class="nav-item" data-page="medical">
+                    <i class="fas fa-notes-medical nav-icon"></i>
+                    <span class="nav-label">Medical Records</span>
+                </li>
+                <li class="nav-item" data-page="biometric">
+                    <i class="fas fa-fingerprint nav-icon"></i>
+                    <span class="nav-label">Biometric Data</span>
+                </li>
+                <li class="nav-item" data-page="documents">
+                    <i class="fas fa-folder-open nav-icon"></i>
+                    <span class="nav-label">Personal Documents</span>
+                </li>
+                <!-- Super-user only nav items -->
+                <li class="nav-item nav-divider sup-nav" id="userMgmtNav" data-page="users" style="display:none">
+                    <i class="fas fa-users-cog nav-icon"></i>
+                    <span class="nav-label">User Management</span>
+                </li>
+                <li class="nav-item" data-page="advanced" style="margin-top: 4px">
+                    <i class="fas fa-sliders nav-icon"></i>
+                    <span class="nav-label">Advanced</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-avatar" id="sidebarAvatar">
+                    <i class="fas fa-user-shield" id="sidebarAvatarIcon"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user-name" id="sidebarUserName">System Admin</span>
+                    <span class="sidebar-user-role" id="sidebarUserRole">Super User</span>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                <i class="fas fa-right-from-bracket"></i>
+                <span class="nav-label">Sign Out</span>
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- ═══════════════════ MAIN AREA ═══════════════════ -->
+    <div class="main-wrapper">
+
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="sidebar-toggle-btn" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-breadcrumb">
+                    <span class="breadcrumb-module">Personnel Management Module</span>
+                    <i class="fas fa-chevron-right breadcrumb-sep"></i>
+                    <span class="breadcrumb-current" id="breadcrumbCurrent">Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- Viewer mode badge -->
+                <div class="viewer-mode-badge" id="viewerBadge" style="display:none">
+                    <i class="fas fa-eye"></i> View Only Mode
+                </div>
+
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search personnel...">
+                </div>
+                <div class="header-controls">
+                    <button class="ctrl-btn" title="Notifications" id="notifBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="ctrl-badge" id="notifBadge">3</span>
+                    </button>
+                    <button class="ctrl-btn" title="Fullscreen" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button class="ctrl-btn" title="Print" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
+                <div class="header-profile">
+                    <div class="profile-avatar" id="headerAvatar">
+                        <i class="fas fa-user-shield" id="headerAvatarIcon"></i>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name" id="headerUserName">Admin</span>
+                        <span class="profile-role" id="headerUserRole">Super User</span>
+                    </div>
+                    <i class="fas fa-chevron-down profile-chevron"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <main class="page-content" id="pageContent">
+            <div class="initial-loader">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Initialising system...</p>
+            </div>
+        </main>
+
+    </div><!-- /.main-wrapper -->
+
+</div><!-- /.app-wrapper -->
+
+
+<!-- ══════════════════ MODAL ══════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+        <div class="modal-hd">
+            <h3 class="modal-hd-title" id="modalTitle">Title</h3>
+            <button class="modal-hd-close" id="modalClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-bd" id="modalBody"></div>
+    </div>
+</div>
+
+<!-- ══════════════════ CONFIRM DIALOG ══════════════════ -->
+<div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box">
+        <div class="confirm-icon-wrap">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h3 class="confirm-title" id="confirmTitle">Confirm</h3>
+        <p class="confirm-msg" id="confirmMsg">Are you sure?</p>
+        <div class="confirm-btns">
+            <button class="btn btn-ghost" id="confirmNo">Cancel</button>
+            <button class="btn btn-danger" id="confirmYes">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════ TOAST STACK ══════════════════ -->
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- Scripts -->
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
